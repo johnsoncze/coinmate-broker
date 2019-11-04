@@ -4,6 +4,11 @@ const utils = require('./lib/utils')
 const coinmate = require('./service/coinmate')(config)
 const logger = require('./service/logger')
 
+const date = new Date()
+if (date.getDay() !== config.buyDay && date.getHours() !== config.buyHour) {
+	logger('No show')
+	process.exit(0)
+}
 const amountToBuy = process.argv[2];
 if (!amountToBuy) {
 	logger('Specify amount to buy')

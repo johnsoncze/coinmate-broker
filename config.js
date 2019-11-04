@@ -8,4 +8,6 @@ module.exports = {
 	},
 	testing: process.env.TESTING,
 	slackWebhookUrl: process.env.SLACK_WEBHOOK_URL,
+	buyDay: parseInt(process.env.BUY_DAY),
+	buyHour: parseInt(process.env.BUY_HOUR),
 }
