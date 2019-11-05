@@ -5,7 +5,7 @@ const coinmate = require('./service/coinmate')(config)
 const logger = require('./service/logger')
 
 const date = new Date()
-if (date.getDay() !== config.buyDay && date.getHours() !== config.buyHour) {
+if (date.getDay() !== config.buyDay || date.getHours() !== config.buyHour) {
 	logger('No show')
 	process.exit(0)
 }
