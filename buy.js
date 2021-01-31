@@ -3,6 +3,7 @@ const slack = require('./service/slack')(config)
 const utils = require('./lib/utils')
 const coinmate = require('./service/coinmate')(config)
 const logger = require('./service/logger')
+const api = require('./service/api')(config)
 
 const date = new Date()
 if (date.getDay() !== config.buyDay || date.getHours() !== config.buyHour) {
@@ -26,6 +27,7 @@ if (!amountToBuy) {
 			await slack.send({
 				text: `I bought \`${t.amount}\` BTC for you. I spent \`${spent}\` CZK`
 			})
+			await api.saveTransaction(spent, t.amount, new Date(t.timestamp), 'BTC')
 		});
 		logger('done')
 	} catch (error) {
